@@ -87,13 +87,11 @@ class LinkedList {
   */
   insertAfter(value, afterValue) {
     const existingElement = this.find(afterValue);
-
     if (existingElement) {
       const newElement = {
         value,
         next: existingElement.next,
       };
-
       existingElement.next = newElement;
     } else {
       console.error("the element has not found in list.");
