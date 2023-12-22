@@ -164,3 +164,4 @@ console.log(ll.toArray());
 
 console.log("find method result: ", ll.find("Akhar"));
 console.log("find method result: ", ll.find("mamad"));
+console.log(ll.head);
