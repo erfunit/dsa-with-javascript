@@ -77,6 +77,29 @@ class LinkedList {
     return null;
   }
 
+  /* 
+  ? insertAfter: an element comes after an existing element which maybe already exists
+  1. we use the pre-created method to find the element that we looking for to insert after that.
+  2. if the element to insert after that is in our list,
+   2.1. we create a new element to insert after, it's value is the input value and it's next is the existingElement's next
+   2.2. and then the existingElement's next becomes new element that's being created and inserted after it.
+  3. if it doesn't exist, we log an error
+  */
+  insertAfter(value, afterValue) {
+    const existingElement = this.find(afterValue);
+
+    if (existingElement) {
+      const newElement = {
+        value,
+        next: existingElement.next,
+      };
+
+      existingElement.next = newElement;
+    } else {
+      console.error("the element has not found in list.");
+    }
+  }
+
   /*
   ? delete: removes an element by its value from the list:
   1. checks if our list is empty or not.
