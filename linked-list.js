@@ -129,6 +129,37 @@ export class LinkedList {
     }
   }
 
+  deleteHead() {
+    if (this.head) {
+      return null;
+    }
+
+    const deletedItem = this.head;
+    if (this.head.next) {
+      this.head = this.head.next;
+    } else {
+      this.head = null;
+      this.tail = null;
+    }
+
+    return deletedItem;
+  }
+
+  pop() {
+    if (!this.head) {
+      return console.log("list is empty!");
+    }
+    let currentElement = this.head;
+    while (currentElement.next) {
+      if (currentElement.next === this.tail) {
+        this.tail = currentElement;
+        return (this.tail.next = null);
+      } else {
+        currentElement = currentElement.next;
+      }
+    }
+  }
+
   /* 
   ?toArray : converts our linked list to an array:
   1. creating an empty array that will be filled by our elements
