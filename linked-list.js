@@ -1,5 +1,5 @@
 // Data structure codes must be a class
-class LinkedList {
+export class LinkedList {
   constructor() {
     // inside documentaions, head is always the first element and tail is always the last element in our data structure.
     this.head = null;
