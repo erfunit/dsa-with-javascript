@@ -1,5 +1,5 @@
 // Data structure codes must be a class
-export class LinkedList {
+class LinkedList {
   constructor() {
     // inside documentaions, head is always the first element and tail is always the last element in our data structure.
     this.head = null;
@@ -137,20 +137,21 @@ export class LinkedList {
   4. if head doesn't have any next element, so we clear the list
 */
   shift() {
-    if (this.head) {
+    if (!this.head) {
+      // List is empty
       return null;
     }
 
     const deletedItem = this.head;
-    if (this.head.next) {
-      this.head = this.head.next;
-    } else {
-      this.clear();
+    this.head = this.head.next;
+
+    if (!this.head) {
+      // List had only one element, so update tail as well
+      this.tail = null;
     }
 
     return deletedItem;
   }
-
   /*
   ? pop: removes one element from the back of list:
   1. checks if the list is empty or not.
@@ -202,21 +203,23 @@ export class LinkedList {
   }
 }
 
-// usage:
-const ll = new LinkedList();
+// // usage:
+// const ll = new LinkedList();
 
-ll.append(2);
-ll.append("hello");
-ll.append(false);
-ll.prepend("mamad");
-ll.prepend("mamad");
-ll.append("akhar");
-ll.prepend("Aval");
+// ll.append(2);
+// ll.append("hello");
+// ll.append(false);
+// ll.prepend("mamad");
+// ll.prepend("mamad");
+// ll.append("akhar");
+// ll.prepend("Aval");
 
-ll.delete(false);
+// ll.delete(false);
 
-console.log(ll.toArray());
+// console.log(ll.toArray());
 
-console.log("find method result: ", ll.find("Akhar"));
-console.log("find method result: ", ll.find("mamad"));
-console.log(ll.head);
+// console.log("find method result: ", ll.find("Akhar"));
+// console.log("find method result: ", ll.find("mamad"));
+// console.log(ll.head);
+
+module.exports = LinkedList;
