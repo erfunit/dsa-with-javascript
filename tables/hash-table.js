@@ -1,99 +1,54 @@
-//  Hash Table
-// Javascript uses hash-table data structure in objects in a very optimized way
+class HashTable {
+  constructor(size = 42) {
+    this.buckets = new Array(size);
+    this.size = size;
+  }
 
-// ? Object: key & value
-/*
-{
-    title: 'book'
-}
-*/
+  hash(key) {
+    // Simple hash function to calculate a hash from the key
+    let hash = 0;
+    for (let char of key) {
+      hash += char.charCodeAt(0);
+    }
+    return hash % this.size;
+  }
 
-// ! Hash Table: index & value
-/*
-{
-    1: 'book'
-}
-*/
+  set(key, value) {
+    // Set a value in the hash table
+    let index = this.hash(key);
+    if (!this.buckets[index]) {
+      this.buckets[index] = [];
+    }
+    this.buckets[index].push([key, value]);
+  }
 
-// to convert key into index, we have to use a "Hashing" function: title => 1
-// Ok, let's have a look at what if we solve a problem that needs hashing but without hashing function:
+  get(key) {
+    // Retrieve a value from the hash table
+    let index = this.hash(key);
+    if (!this.buckets[index]) return null;
+    for (let [k, v] of this.buckets[index]) {
+      if (k === key) return v;
+    }
+    return null;
+  }
 
-// TODO: we wanna find the first character that is being repeated:
-const messsage = "hello world";
-
-function findFirstChar(str) {
-  for (let i = 0; i < str.length; i++) {
-    for (let j = i + 1; j < str.length; j++) {
-      if (str[i] === str[j]) {
-        return str[i];
+  remove(key) {
+    // Remove a value from the hash table
+    let index = this.hash(key);
+    if (!this.buckets[index]) return null;
+    for (let i = 0; i < this.buckets[index].length; i++) {
+      if (this.buckets[index][i][0] === key) {
+        this.buckets[index].splice(i, 1);
+        return;
       }
     }
   }
 }
 
-console.log("O(n^2): ", findFirstChar(messsage));
-
-// : time complexity: O(n^2)
-//! so, it's not a suitable choice because there is something better to use!
-
-// USING HASH-TABLE (javascript object):
-function findFirstCharWithObject(str) {
-  const table = {};
-
-  for (let char of str) {
-    console.log(table);
-    if (table[char]) {
-      return char;
-    }
-    table[char] = 1;
-  }
-}
-
-console.log("O(n): ", findFirstCharWithObject(messsage));
-// : time complexity: O(n)
-// ? so, it's a better choice because it has a better and faster runtime complexity of O(n) which is linear and also which is better than quadratic
-
-// ---------------------------------------------------------- pure codes:
-
-class HashTable {
-  constructor() {
-    this.size = 1000;
-    this.products = Array(1000).fill(null);
-  }
-
-  hash(key) {
-    let hash = 0;
-
-    for (const char of key) {
-      hash += char.charCodeAt(0);
-    }
-
-    return hash % this.size;
-  }
-
-  set(key, value) {
-    const keyHash = this.hash(key);
-    this.products[keyHash] = value;
-  }
-
-  get(key) {
-    const keyHash = this.hash(key);
-    return this.products[keyHash];
-  }
-}
-
-// the function that we used before, with the HashTable class:
-function firstChar(str) {
-  const table = new HashTable();
-  //   const table = {};
-
-  for (let char of str) {
-    // console.log(table);
-    if (table.get(char)) {
-      return char;
-    }
-    table.set(char, 1);
-  }
-}
-
-console.log("the repeated function with HashTable class:", firstChar(messsage));
+// Example usage:
+const hashTable = new HashTable();
+hashTable.set("name", "John");
+hashTable.set("age", 25);
+console.log(hashTable.get("name")); // John
+hashTable.remove("name");
+console.log(hashTable.get("name")); // null
