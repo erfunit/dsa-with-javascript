@@ -5,7 +5,7 @@
 . if an elements is going ot be removed from this list, it's removed from front and called "DEQUEUE".
 */
 
-import { LinkedList } from "./linked-list";
+const LinkedList = require("./linked-list");
 
 class Queue {
   constructor() {
@@ -30,11 +30,8 @@ class Queue {
 
 // usage:
 const queue = new Queue();
-queue.enqueue(1);
-queue.enqueue(2);
-queue.enqueue(3);
 queue.enqueue(4);
 
 queue.dequeue();
 
-console.log(queue.toArray());
+console.log("the list:", queue.toArray());
