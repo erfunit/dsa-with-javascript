@@ -129,7 +129,14 @@ export class LinkedList {
     }
   }
 
-  deleteHead() {
+  /*
+  ? shift: removes the first element from the list
+  1. checks if the list is empty, returns null
+  2. creates a constant of being deleted item to return it after operation  (which is constantly the head)
+  3. if there is a next for the head, it becomes the head
+  4. if head doesn't have any next element, so we clear the list
+*/
+  shift() {
     if (this.head) {
       return null;
     }
@@ -138,13 +145,21 @@ export class LinkedList {
     if (this.head.next) {
       this.head = this.head.next;
     } else {
-      this.head = null;
-      this.tail = null;
+      this.clear();
     }
 
     return deletedItem;
   }
 
+  /*
+  ? pop: removes one element from the back of list:
+  1. checks if the list is empty or not.
+  2. starts looping through the list by creating current element filling with head
+  3. while the currentElement has next value, it keeps looping
+  4. if the currentElement's next is equal to the tail, 
+    the currentElement becomes our head and the next gets empty with null keyword
+  5. if not, keeps going with assiging currentElement with its next
+  */
   pop() {
     if (!this.head) {
       return console.log("list is empty!");
@@ -158,6 +173,14 @@ export class LinkedList {
         currentElement = currentElement.next;
       }
     }
+  }
+
+  /*
+  ? clear: clears the list with making head and title empty by null keyword
+  */
+  clear() {
+    this.head = null;
+    this.tail = null;
   }
 
   /* 
@@ -179,6 +202,7 @@ export class LinkedList {
   }
 }
 
+// usage:
 const ll = new LinkedList();
 
 ll.append(2);
