@@ -2,7 +2,7 @@ interface IGraph {
   adjacencyList: { [key: string]: { [key: string]: number } };
 }
 
-class Graph implements IGraph {
+export class Graph implements IGraph {
   adjacencyList: { [key: string]: { [key: string]: number } };
   constructor() {
     this.adjacencyList = {};
