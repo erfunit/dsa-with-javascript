@@ -2,7 +2,7 @@ interface IGraph {
   adjacencyList: { [key: string]: { [key: string]: number } };
 }
 
-export class Graph implements IGraph {
+class Graph implements IGraph {
   adjacencyList: { [key: string]: { [key: string]: number } };
   constructor() {
     this.adjacencyList = {};
@@ -28,6 +28,25 @@ export class Graph implements IGraph {
     return this.adjacencyList;
   }
 }
+
+class PriorityQueue<T> {
+  private items: { value: T; priority: number }[] = [];
+
+  enqueue(value: T, priority: number) {
+    this.items.push({ value, priority });
+    this.items.sort((a, b) => a.priority - b.priority);
+  }
+
+  dequeue(): T | undefined {
+    return this.items.shift()?.value;
+  }
+
+  isEmpty(): boolean {
+    return this.items.length === 0;
+  }
+}
+
+export { Graph, PriorityQueue };
 
 const graph = new Graph();
 
